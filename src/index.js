@@ -8,31 +8,24 @@ app.get('/', (req, res) => {
     res.send('Arithmetic service - Hello World!');
 });
 
-app.get('/:operator/:n/:m', (req, res) => {
-    const { operator, n, m } = req.params;
-    let result;
-    switch (operator) {
-        case '+':
-            result = Number(n) + Number(m);
-            break;
-        case '-':
-            result = Number(n) - Number(m);
-            break;
-        case '*':
-            result = Number(n) * Number(m);
-            break;
-        case '/':
-            if (Number(m) === 0) {
-                result = 'Cannot divide by zero';
-            } else {
-                result = Number(n) / Number(m);
-            }
-            break;
-        default:
-            result = 'Invalid operator';
-            break;
+app.get('/add/:n/:m', (req, res) => {
+    res.json(Number(req.params.n) + Number(req.params.m));
+});
+
+app.get('/subtract/:n/:m', (req, res) => {
+    res.json(Number(req.params.n) - Number(req.params.m));
+});
+
+app.get('/multiply/:n/:m', (req, res) => {
+    res.json(Number(req.params.n) * Number(req.params.m));
+});
+
+app.get('/divide/:n/:m', (req, res) => {
+    if(Number(req.params.m) === 0) {
+        res.json('Cannot divide by zero');
+    } else {
+        res.json(Number(req.params.n) / Number(req.params.m));
     }
-    res.json(result);
 });
 
 app.listen(port);
