@@ -9,7 +9,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: npm install
-              run: npm cl
+              run: npm ci
             - name: run the unit test
               run: npm test
             - name: Build and push the image
